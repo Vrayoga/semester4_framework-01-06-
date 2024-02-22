@@ -76,4 +76,16 @@ router.post('/update/(:id)', function(req, res, next){
     }
 })
 
+ router.get('/delete/(:id)', function(req, res){
+    let id = req.params.id;
+    connection.query('delete from kategori where id_kategori = ' + id, function(err){
+        if (err){
+            req.flash('error','gagal menghapus data');
+        }else{
+            req.flash('success','data berhasil dihapus');
+        }
+        res.redirect('/kategori');
+    })
+ })
+
 module.exports = router;
